@@ -1,0 +1,9 @@
+workshop_id,name,slot,participants,organizer,languages,doable_from_lampedusa
+1,Hackathon,1,10,Science,"it,en",False
+2,Hackathon,2,10,Science,"it,zh",False
+3,Hackathon,3,10,Science,"it,en",True
+4,Art Therapy,1,,Arts,"en,es",True
+5,Art Therapy,2,,Arts,"en",True
+6,Robotics Workshop,1,,Engineering,"en,it",True
+7,Robotics Workshop,2,,Engineering,"en,it",True
+8,Robotics Workshop,3,,Engineering,"en,zh",True
