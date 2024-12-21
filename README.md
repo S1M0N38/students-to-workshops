@@ -18,7 +18,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 2. Run the script
 
 ```bash
-uv run https://raw.githubusercontent.com/S1M0N38/students-to-workshops/main/main.py \
+uv run https://raw.githubusercontent.com/S1M0N38/students-to-workshops/refs/heads/main/main.py \
   --students-path path/to/students.csv \
   --workshops-path path/to/workshops.csv \
   --mapping-path path/to/mapping.csv
