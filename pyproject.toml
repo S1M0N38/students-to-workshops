@@ -1,6 +1,6 @@
 [project]
 name = "students-to-workshops"
-version = "0.1.0"
+version = "0.0.0"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
@@ -11,8 +11,26 @@ dependencies = [
   "tqdm>=4.67.1",
 ]
 
+[tool.ruff]
+line-length = 88
+indent-width = 4
+extend-include = ["*.ipynb"]
+lint.task-tags = ["FIX", "TODO", "HACK", "WARN", "PERF", "NOTE", "TEST"]
+
+[tool.ruff.format]
+quote-style = "double"
 
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
 typeCheckingMode = "off"
+
+[tool.commitizen]
+tag_format = "v$major.$minor.$patch$prerelease"
+version_files = ["pyproject.toml", "src/lyricslm/__init__.py"]
+bump_message = "release: $current_version → $new_version"
+update_changelog_on_bump = true
+annotated_tag = true
+gpg_sign = true
+major_version_zero = false
+version_provider = "pep621"
