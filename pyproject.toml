@@ -1,0 +1,18 @@
+[project]
+name = "students-to-workshops"
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "ipykernel>=6.29.5",
+  "matplotlib>=3.9.4",
+  "pandas>=2.2.3",
+  "seaborn>=0.13.2",
+  "tqdm>=4.67.1",
+]
+
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+typeCheckingMode = "off"
