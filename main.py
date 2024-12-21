@@ -1,5 +1,12 @@
-#!/usr/bin/env python
-# uv: dependencies = ["pandas", "matplotlib", "seaborn", "tqdm" ]
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "matplotlib",
+#     "pandas",
+#     "seaborn",
+#     "tqdm",
+# ]
+# ///
 
 import argparse
 from collections import Counter
