@@ -1,7 +1,14 @@
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "matplotlib",
+#     "pandas",
+# ]
+# ///
+
 from collections import defaultdict
 
 import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load CSV files as DataFrames
