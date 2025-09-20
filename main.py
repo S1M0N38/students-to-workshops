@@ -6,21 +6,17 @@
 # ]
 # ///
 
+import argparse
 from collections import defaultdict
 
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Load CSV files as DataFrames
-S_DF = pd.read_csv("data/students.csv", index_col="student_id")
-W_DF = pd.read_csv("data/workshops.csv", index_col="workshop_id")
+# Global DataFrames - will be loaded in main()
+S_DF = None
+W_DF = None
 
-
-# split the W_DF into 3 dataframes based on slot
-W_DF_2 = W_DF[W_DF["slot"] == 2]
-W_DF_3 = W_DF[W_DF["slot"] == 3]
-
-
+# Global dictionaries for student-workshop mappings
 w_id_to_s_id: dict[int, list[int]] = defaultdict(list)
 s_id_to_w_id: dict[int, list[int]] = defaultdict(list)
 
@@ -91,9 +87,9 @@ def map_students_to_workshops(slot):
         print(f"Unassigned student IDs: {unassigned_students}")
 
 
-def export_mapping_to_csv():
-    """Export the student-workshop mappings to data/mapping.csv."""
-    print("Exporting mappings to data/mapping.csv...")
+def export_mapping_to_csv(mapping_path):
+    """Export the student-workshop mappings to the specified CSV file."""
+    print(f"Exporting mappings to {mapping_path}...")
 
     # Create list of rows for the CSV
     mapping_rows = []
@@ -116,8 +112,8 @@ def export_mapping_to_csv():
 
     # Create DataFrame and save to CSV
     mapping_df = pd.DataFrame(mapping_rows)
-    mapping_df.to_csv("data/mapping.csv", index=False)
-    print(f"Exported {len(mapping_rows)} student mappings to data/mapping.csv")
+    mapping_df.to_csv(mapping_path, index=False)
+    print(f"Exported {len(mapping_rows)} student mappings to {mapping_path}")
 
 
 def plot_workshop_distribution(slot):
@@ -148,12 +144,41 @@ def plot_workshop_distribution(slot):
 
 
 def main():
+    # Set up argument parser
+    parser = argparse.ArgumentParser(
+        description="Map students to workshops based on eligibility criteria"
+    )
+    parser.add_argument(
+        "--students-path",
+        default="data/students.csv",
+        help="Path to the students CSV file (default: data/students.csv)",
+    )
+    parser.add_argument(
+        "--workshops-path",
+        default="data/workshops.csv",
+        help="Path to the workshops CSV file (default: data/workshops.csv)",
+    )
+    parser.add_argument(
+        "--mapping-path",
+        default="data/mapping.csv",
+        help="Path to output the mapping CSV file (default: data/mapping.csv)",
+    )
+
+    args = parser.parse_args()
+
+    # Load CSV files as DataFrames
+    global S_DF, W_DF
+    print(f"Loading students from: {args.students_path}")
+    print(f"Loading workshops from: {args.workshops_path}")
+    S_DF = pd.read_csv(args.students_path, index_col="student_id")
+    W_DF = pd.read_csv(args.workshops_path, index_col="workshop_id")
+
     map_students_to_workshops(1)
     map_students_to_workshops(2)
     map_students_to_workshops(3)
 
     # Export all mappings to CSV
-    export_mapping_to_csv()
+    export_mapping_to_csv(args.mapping_path)
 
     # Generate distribution plots
     plot_workshop_distribution(1)
