@@ -26,6 +26,17 @@ uv run https://raw.githubusercontent.com/S1M0N38/students-to-workshops/refs/head
 
 Add  `--help` to the last command to see the available options.
 
+3. Test the mapping
+
+```bash
+uv run https://raw.githubusercontent.com/S1M0N38/students-to-workshops/refs/heads/main/test.py \
+  --students-path path/to/students.csv \
+  --workshops-path path/to/workshops.csv \
+  --mapping-path path/to/mapping.csv
+```
+
+Add  `--help` to the last command to see the available options.
+
 ______________________________________________________________________
 
 ## Tables
