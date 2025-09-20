@@ -172,6 +172,10 @@ def main(s_df, w_df):
     w_df["participants"] = w_df["participants"].fillna(0).astype(int)
     w_df["count"] = 0
 
+    # Handle carriage returns and convert boolean columns
+    s_df["from_lampedusa"] = s_df["from_lampedusa"].astype(str).str.strip().str.upper() == "TRUE"
+    w_df["doable_from_lampedusa"] = w_df["doable_from_lampedusa"].astype(str).str.strip().str.upper() == "TRUE"
+
     # Initialize data structure for storing results
     s_id_to_w_id: [int, set[int]] = {s_id: set() for s_id in s_df.index}
 
@@ -221,6 +225,10 @@ if __name__ == "__main__":
     # Load CSV files as DataFrames
     S_DF = pd.read_csv(args.students_path)
     W_DF = pd.read_csv(args.workshops_path)
+
+    # Assert uniqueness of IDs
+    assert S_DF["student_id"].is_unique, f"Duplicate student_id found in {args.students_path}"
+    assert W_DF["workshop_id"].is_unique, f"Duplicate workshop_id found in {args.workshops_path}"
 
     mapping = {}
     best_mapping_score = 0
