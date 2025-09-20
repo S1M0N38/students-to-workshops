@@ -78,7 +78,9 @@ def map_students_to_workshops(slot):
             unassigned_students.append(s_id)
 
     if unassigned_students:
-        print(f"Warning: {len(unassigned_students)} students could not be assigned to any workshop in slot {slot}")
+        print(
+            f"Warning: {len(unassigned_students)} students could not be assigned to any workshop in slot {slot}"
+        )
         print(f"Unassigned student IDs: {unassigned_students}")
 
 
@@ -96,12 +98,14 @@ def export_mapping_to_csv():
         while len(workshops) < 3:
             workshops.append(None)
 
-        mapping_rows.append({
-            'student_id': student_id,
-            'workshop_id_1': workshops[0] if workshops[0] is not None else '',
-            'workshop_id_2': workshops[1] if workshops[1] is not None else '',
-            'workshop_id_3': workshops[2] if workshops[2] is not None else ''
-        })
+        mapping_rows.append(
+            {
+                "student_id": student_id,
+                "workshop_id_1": workshops[0] if workshops[0] is not None else "",
+                "workshop_id_2": workshops[1] if workshops[1] is not None else "",
+                "workshop_id_3": workshops[2] if workshops[2] is not None else "",
+            }
+        )
 
     # Create DataFrame and save to CSV
     mapping_df = pd.DataFrame(mapping_rows)
